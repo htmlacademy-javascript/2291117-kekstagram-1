@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Глеб Мезенин](https://up.htmlacademy.ru/javascript-individual/1/user/2291117).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Устименко](https://htmlacademy.ru/profile/spiritmoon).
 
 ---
 
