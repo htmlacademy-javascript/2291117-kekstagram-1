@@ -1,0 +1,104 @@
+//константы
+const MESSAGES = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+];
+const NAMES = [
+  'Иван',
+  'Хуан Себастьян',
+  'Мария',
+  'Кристоф',
+  'Виктор',
+  'Юлия',
+  'Люпита',
+  'Вашингтон',
+  'Олег',
+  'Никита',
+  'Елена',
+  'Борис',
+];
+const DESCRIPTIONS = [
+  'Не стоит искать свое счастье там, где ты его однажды уже потерял.',
+  'Не жди идеальный момент — создавай его сам.',
+  'Мечтай! Твори! Дерзай! Только в этом случае тебе не придется жалеть о бесцельно прожитом времени.',
+  'Лучший способ предсказать будущее — активно работать над его созданием.',
+  'Никогда не проверяй глубину воды сразу обеими ногами.',
+  'После дождя всегда выглядывает солнце, а там и до радуги недалеко.',
+  'Стараясь о счастье других, мы находим свое собственное.',
+  'Откладывая что-то на завтра, нужно быть уверенным, что это самое завтра наступит.',
+  'Единственный способ стать умнее — играть с сильным противником.',
+  'Если не идти к цели даже маленькими шагами, ты к ней не придешь.',
+];
+const PHOTOS_COUNT = 25;
+const LIKES_MIN_COUNT = 15;
+const LIKES_MAX_COUNT = 200;
+const LIKES_MIN_COMMENTS = 0;
+const LIKES_MAX_COMMENTS = 10;
+const AVATAR_MIN_COUNTS = 1;
+const AVATAR_MAX_COUNTS = 6;
+
+//получаем целое случайное число из диапазона
+const getRandomInteger = (a, b) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
+};
+
+// получаем случайный элемент массива
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
+// генерируем номер
+const getIdGenerator = () => {
+  let firstGenerateId = 0;
+
+  return function () {
+    firstGenerateId += 1;
+
+    return firstGenerateId;
+  };
+};
+
+//генерируем id фото
+const generatePhotoId = getIdGenerator();
+
+// генерируем url
+const generatePhotoUrl = getIdGenerator();
+
+//генерируем id комментариев
+const generateCommentsId = getIdGenerator();
+
+//генерируем комментарии
+const generateCommentsPhoto = () => {
+  const arrayComments = [];
+
+  for (let i = 0; i < getRandomInteger(LIKES_MIN_COMMENTS, LIKES_MAX_COMMENTS); i++) {
+    arrayComments.push({
+      id: generateCommentsId(),
+      avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_COUNTS, AVATAR_MAX_COUNTS)}.svg`,
+      message: getRandomArrayElement(MESSAGES),
+      name: getRandomArrayElement(NAMES),
+    });
+  }
+
+  return arrayComments;
+};
+
+//генерируем объект
+const getPhotoUsers = () => ({
+  id: generatePhotoId(),
+  url: `photos/${generatePhotoUrl()}.jpg`,
+  description: getRandomArrayElement(DESCRIPTIONS),
+  likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
+  comments: generateCommentsPhoto(),
+});
+
+//генерируем 25 объектов
+const getAllPhotoUsers = () => Array.from({ length: PHOTOS_COUNT }, getPhotoUsers);
+
+getAllPhotoUsers();
