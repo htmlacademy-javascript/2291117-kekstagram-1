@@ -34,10 +34,9 @@ const DESCRIPTIONS = [
   'Если не идти к цели даже маленькими шагами, ты к ней не придешь.',
 ];
 const PHOTOS_COUNT = 25;
+const COMMENTS_COUNT = 10;
 const LIKES_MIN_COUNT = 15;
 const LIKES_MAX_COUNT = 200;
-const LIKES_MIN_COMMENTS = 0;
-const LIKES_MAX_COMMENTS = 10;
 const AVATAR_MIN_COUNTS = 1;
 const AVATAR_MAX_COUNTS = 6;
 
@@ -53,52 +52,28 @@ const getRandomInteger = (a, b) => {
 // получаем случайный элемент массива
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-// генерируем номер
-const getIdGenerator = () => {
-  let firstGenerateId = 0;
-
-  return function () {
-    firstGenerateId += 1;
-
-    return firstGenerateId;
-  };
-};
-
-//генерируем id фото
-const generatePhotoId = getIdGenerator();
-
-// генерируем url
-const generatePhotoUrl = getIdGenerator();
-
-//генерируем id комментариев
-const generateCommentsId = getIdGenerator();
-
 //генерируем комментарии
-const generateCommentsPhoto = () => {
-  const arrayComments = [];
+const generateCommentPhoto = (id) => ({
+  id,
+  avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_COUNTS, AVATAR_MAX_COUNTS)}.svg`,
+  message: getRandomArrayElement(MESSAGES),
+  name: getRandomArrayElement(NAMES),
+});
 
-  for (let i = 0; i < getRandomInteger(LIKES_MIN_COMMENTS, LIKES_MAX_COMMENTS); i++) {
-    arrayComments.push({
-      id: generateCommentsId(),
-      avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_COUNTS, AVATAR_MAX_COUNTS)}.svg`,
-      message: getRandomArrayElement(MESSAGES),
-      name: getRandomArrayElement(NAMES),
-    });
-  }
-
-  return arrayComments;
-};
+const generateCommentsPhoto = (length) =>
+  Array.from({ length }, (_, index) => generateCommentPhoto(index + 1));
 
 //генерируем объект
-const getPhotoUsers = () => ({
-  id: generatePhotoId(),
-  url: `photos/${generatePhotoUrl()}.jpg`,
+const getPhotoUsers = (id) => ({
+  id,
+  url: `photos/${id}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
-  comments: generateCommentsPhoto(),
+  comments: generateCommentsPhoto(COMMENTS_COUNT),
 });
 
 //генерируем 25 объектов
-const getAllPhotoUsers = () => Array.from({ length: PHOTOS_COUNT }, getPhotoUsers);
+const getAllPhotoUsers = (length) =>
+  Array.from({ length }, (_, index) => getPhotoUsers(index + 1));
 
-getAllPhotoUsers();
+getAllPhotoUsers(PHOTOS_COUNT);
