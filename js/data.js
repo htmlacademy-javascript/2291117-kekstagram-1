@@ -1,5 +1,5 @@
-import {getRandomInteger} from './util.js';
-import {getRandomArrayElement} from './util.js';
+import {getRandomInteger} from './utils.js';
+import {getRandomArrayElement} from './utils.js';
 
 //константы
 const MESSAGES = [
@@ -44,15 +44,15 @@ const AVATAR_MIN_COUNTS = 1;
 const AVATAR_MAX_COUNTS = 6;
 
 //генерируем комментарии
-const generateCommentPhoto = (id) => ({
+const createComment = (id) => ({
   id,
   avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_COUNTS, AVATAR_MAX_COUNTS)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 
-const generateCommentsPhoto = (length) =>
-  Array.from({ length }, (_, index) => generateCommentPhoto(index + 1));
+const createComments = (length) =>
+  Array.from({ length }, (_, index) => createComment(index + 1));
 
 //генерируем объект
 const getPhotoUsers = (id) => ({
@@ -60,12 +60,11 @@ const getPhotoUsers = (id) => ({
   url: `photos/${id}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
-  comments: generateCommentsPhoto(COMMENTS_COUNT),
+  comments: createComments(COMMENTS_COUNT),
 });
 
 //генерируем 25 объектов
-const getAllPhotoUsers = (length) =>
+const createPhotoList = (length) =>
   Array.from({ length }, (_, index) => getPhotoUsers(index + 1));
 
-export {getAllPhotoUsers};
-export {PHOTOS_COUNT};
+createPhotoList(PHOTOS_COUNT);
