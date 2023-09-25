@@ -55,7 +55,7 @@ const createComments = (length) =>
   Array.from({ length }, (_, index) => createComment(index + 1));
 
 //генерируем объект
-const getPhotoUsers = (id) => ({
+const createPhotoUsers = (id) => ({
   id,
   url: `photos/${id}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
@@ -64,7 +64,7 @@ const getPhotoUsers = (id) => ({
 });
 
 //генерируем 25 объектов
-const createPhotoList = (length) =>
-  Array.from({ length }, (_, index) => getPhotoUsers(index + 1));
+const createPhotoList = () =>
+  Array.from({ length: PHOTOS_COUNT }, (_, index) => createPhotoUsers(index + 1));
 
-createPhotoList(PHOTOS_COUNT);
+export {createPhotoList};
