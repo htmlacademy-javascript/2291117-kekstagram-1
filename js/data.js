@@ -1,7 +1,6 @@
 import {getRandomInteger} from './utils.js';
 import {getRandomArrayElement} from './utils.js';
 
-//константы
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -43,7 +42,6 @@ const LIKES_MAX_COUNT = 200;
 const AVATAR_MIN_COUNTS = 1;
 const AVATAR_MAX_COUNTS = 6;
 
-//генерируем комментарии
 const createComment = (id) => ({
   id,
   avatar: `img/avatar-${getRandomInteger(AVATAR_MIN_COUNTS, AVATAR_MAX_COUNTS)}.svg`,
@@ -54,7 +52,6 @@ const createComment = (id) => ({
 const createComments = (length) =>
   Array.from({ length }, (_, index) => createComment(index + 1));
 
-//генерируем объект
 const createPhotoUsers = (id) => ({
   id,
   url: `photos/${id}.jpg`,
@@ -63,7 +60,6 @@ const createPhotoUsers = (id) => ({
   comments: createComments(COMMENTS_COUNT),
 });
 
-//генерируем 25 объектов
 const createPhotoList = () =>
   Array.from({ length: PHOTOS_COUNT }, (_, index) => createPhotoUsers(index + 1));
 
