@@ -1,10 +1,7 @@
-//import { createPhotoList } from './data.js';
-import {showBigPicture} from './big-photo.js';
+import { showBigPicture } from './big-photo.js';
 
 const gallery = document.querySelector('.pictures');
 const photoElement = document.querySelector('#picture').content.querySelector('.picture');
-
-//const photoLists = createPhotoList();
 
 const createPhotoElement = (photoData) => {
   const userPhoto = photoElement.cloneNode(true);
@@ -33,5 +30,5 @@ const renderGallery = (photos) => {
 
 };
 
-export {renderGallery};
+export { renderGallery };
 
