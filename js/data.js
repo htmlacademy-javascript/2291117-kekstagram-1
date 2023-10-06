@@ -1,5 +1,4 @@
-import {getRandomInteger} from './utils.js';
-import {getRandomArrayElement} from './utils.js';
+import { getRandomInteger, getRandomArrayElement } from './utils.js';
 
 const MESSAGES = [
   'Всё отлично!',
@@ -63,4 +62,5 @@ const createPhotoUsers = (id) => ({
 const createPhotoList = () =>
   Array.from({ length: PHOTOS_COUNT }, (_, index) => createPhotoUsers(index + 1));
 
-export {createPhotoList};
+export { createPhotoList };
+

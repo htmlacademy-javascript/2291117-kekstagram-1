@@ -1,4 +1,6 @@
-import {createPhotoList} from './data.js';
-import './photos.js';
 
-createPhotoList();
+import { createPhotoList } from './data.js';
+import { renderGallery } from './photos.js';
+
+renderGallery(createPhotoList());
+
