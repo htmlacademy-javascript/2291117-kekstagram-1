@@ -1,3 +1,4 @@
+
 import { showBigPicture } from './big-photo.js';
 
 const gallery = document.querySelector('.pictures');
@@ -31,4 +32,5 @@ const renderGallery = (photos) => {
 };
 
 export { renderGallery };
+
 

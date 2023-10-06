@@ -63,3 +63,4 @@ const createPhotoList = () =>
   Array.from({ length: PHOTOS_COUNT }, (_, index) => createPhotoUsers(index + 1));
 
 export { createPhotoList };
+
